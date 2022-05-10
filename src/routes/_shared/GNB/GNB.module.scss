@@ -3,8 +3,9 @@
 .gnb {
   display: flex;
   justify-content: center;
-  padding: 24px 0;
-  border-bottom: 1px solid colors.$GRAYE;
+  padding: 17px 0;
+  background-color: red;
+  border-bottom: 1px solid #eeeeee;
 
   ul {
     display: flex;

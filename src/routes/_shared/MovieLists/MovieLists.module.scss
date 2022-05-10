@@ -1,0 +1,39 @@
+@use '/src/styles/constants/colors';
+
+.MovieLists {
+  height: fill-available;
+  padding: 0 30px;
+  border: 1px solid blue;
+}
+
+.MovieLists {
+  overflow: hidden;
+
+  .movieWrap {
+    $movieHeight: 65px;
+    display: flex;
+    justify-content: space-between;
+    height: $movieHeight;
+    margin-top: 20px;
+    overflow: hidden;
+    background-color: yellowgreen;
+    border-radius: 10px;
+
+    .imgNix {
+      width: $movieHeight;
+      height: inherit;
+      background-color: colors.$BLACK;
+    }
+
+    .movieImg {
+      height: inherit;
+    }
+
+    .movieInfo {
+      width: 150px;
+      margin: 10px;
+      font-size: 10px;
+      text-align: end;
+    }
+  }
+}
