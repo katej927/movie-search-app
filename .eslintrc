@@ -1,0 +1,101 @@
+{
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "react-app",
+    "prettier",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "jasmine": true,
+    "jest": true
+  },
+  "settings": {
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    },
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "semi": ["warn", "never"],
+    "no-var": "warn", // var 금지
+    "no-multiple-empty-lines": "warn", // 여러 줄 공백 금지
+    "no-console": ["warn", { "allow": ["warn", "error"] }], // console.log() 금지
+    "eqeqeq": "warn", // 일치 연산자 사용 필수
+    "dot-notation": "warn", // 가능하다면 dot notation 사용
+    "no-unused-vars": "warn", // 사용하지 않는 변수 금지
+    "react/destructuring-assignment": "warn", // state, prop 등에 구조분해 할당 적용
+    "react/jsx-pascal-case": "warn", // 컴포넌트 이름은 PascalCase로
+    "react/no-direct-mutation-state": "warn", // state 직접 수정 금지
+    "react/jsx-no-useless-fragment": "warn", // 불필요한 fragment 금지
+    "react/no-unused-state": "warn", // 사용되지 않는 state
+    "react/jsx-key": "warn", // 반복문으로 생성하는 요소에 key 강제
+    "react/self-closing-comp": "warn", // 셀프 클로징 태그 가능하면 적용
+    "react/jsx-curly-brace-presence": "warn", // jsx 내 불필요한 중괄호 금지
+    "arrow-body-style": "off",
+    "react/function-component-definition": ["warn", { "namedComponents": "arrow-function" }],
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-indent": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-array-index-key": "warn",
+    "react/require-default-props": "off",
+    "react/jsx-wrap-multilines": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "import/prefer-default-export": "off",
+    "import/no-unresolved": "off",
+    "import/order": "off",
+    "import/no-anonymous-default-export": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [".storybook/**", "src/stories/**"]
+      }
+    ],
+    // "max-lines": ["warn", 150],
+    "no-param-reassign": ["error", { "props": false }],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+
+    "no-shadow": "off",
+    "no-unused-expressions": ["warn"],
+    "@typescript-eslint/no-shadow": ["error"],
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "prefer-const": ["warn"],
+    "prefer-destructuring": ["error", { "object": true, "array": false }],
+    "lines-between-class-members": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "labelComponents": ["label"],
+        "labelAttributes": ["htmlFor"],
+        "controlComponents": ["input"]
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  }
+}
