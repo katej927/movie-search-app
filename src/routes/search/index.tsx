@@ -1,10 +1,10 @@
 import { useMount, useState } from 'hooks'
 import { getMoviesApi } from 'services/movie'
 import { ISearch } from 'types/movie'
-import styles from './SearchMovie.module.scss'
+import styles from './Search.module.scss'
 import MovieLists from 'components/movieLists'
 
-const SearchMovie = () => {
+const Search = () => {
   const [allmovies, setAllMovies] = useState<ISearch[]>()
 
   useMount(() => {
@@ -14,4 +14,4 @@ const SearchMovie = () => {
   return <MovieLists movieDatas={allmovies} />
 }
 
-export default SearchMovie
+export default Search
