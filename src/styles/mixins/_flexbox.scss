@@ -5,6 +5,7 @@ $FLEX_MAP: (
   'end': flex-end,
   'start': flex-start,
   'stretch': stretch,
+  'space-evenly': space-evenly,
 );
 
 @function _getFlexValue($key) {

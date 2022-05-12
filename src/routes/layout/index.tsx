@@ -5,6 +5,7 @@ import styles from './Layout.module.scss'
 
 import Tab from 'components/tab'
 import Header from 'components/header'
+import Modal from 'components/modal'
 
 const Layout = () => {
   return (
@@ -13,6 +14,7 @@ const Layout = () => {
         <title>Movie Search App</title>
       </Helmet>
       <main className={styles.app}>
+        <Modal />
         <Header />
         <Outlet />
         <Tab />

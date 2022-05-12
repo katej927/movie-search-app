@@ -1,0 +1,39 @@
+@use '/src/styles/mixins/position';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/sizes';
+
+.overlay {
+  @include position.absolute([0, 0, 0, 0]);
+  @include flexbox.flexbox(center, center);
+  background-color: rgba(0, 0, 0, 50%);
+
+  &.hide {
+    display: none;
+  }
+
+  .content {
+    @include flexbox.flexbox(space-evenly, center);
+    width: 250px;
+    height: 100px;
+    background-color: var(--primary-white1);
+    border-radius: sizes.$GLOBAL_BORDER-RADIUS;
+
+    button {
+      width: 100px;
+      height: 35px;
+      font-size: sizes.$FONT_SIZE_REGULAR;
+      color: var(--primary-gray);
+      background: pink;
+      background-image: linear-gradient(#ffffff, #ffffff), var(--primary-lg);
+      background-clip: content-box, border-box;
+      background-origin: border-box;
+      border: 1.5px solid transparent;
+      border-radius: 10px;
+
+      &:hover {
+        color: var(--primary-white2);
+        background-image: var(--primary-lg);
+      }
+    }
+  }
+}

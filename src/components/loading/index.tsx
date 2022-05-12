@@ -1,5 +1,12 @@
+import styles from './Loading.module.scss'
+import ReactLoading from 'react-loading'
+
 const Loading = () => {
-  return <div style={{ color: '#FF0000' }}>...loading</div>
+  return (
+    <div className={styles.Loading}>
+      <ReactLoading type='spinningBubbles' />
+    </div>
+  )
 }
 
 export default Loading

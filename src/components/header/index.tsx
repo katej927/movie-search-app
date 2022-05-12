@@ -23,7 +23,7 @@ const Header = () => {
           className={styles.searchInput}
           type='search'
           name='searchInput'
-          placeholder='검색어 입력'
+          placeholder='제목으로 입력'
           onChange={handleChange}
           value={text}
         />
