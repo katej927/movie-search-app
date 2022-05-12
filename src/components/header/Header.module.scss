@@ -1,0 +1,24 @@
+@use '/src/styles/mixins/flexbox';
+
+.header {
+  @include flexbox.flexbox(center, center);
+  height: 67px;
+
+  .form {
+    @include flexbox.flexbox(center, center);
+    margin: 26px 0;
+    border: 1px solid black;
+    border-radius: 13px;
+
+    .searchInput {
+      width: 250px;
+      padding: 10px;
+      // background-color: rgba(white, 0.5);
+    }
+
+    .btn {
+      margin-left: 15px;
+      @include flexbox.flexbox(center, center);
+    }
+  }
+}

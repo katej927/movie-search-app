@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
+import { HelmetProvider } from 'react-helmet-async'
 import Routes from './routes'
 
 import reportWebVitals from './reportWebVitals'
@@ -12,7 +13,9 @@ root.render(
   <React.StrictMode>
     <RecoilRoot>
       <BrowserRouter>
-        <Routes />
+        <HelmetProvider>
+          <Routes />
+        </HelmetProvider>
       </BrowserRouter>
     </RecoilRoot>
   </React.StrictMode>

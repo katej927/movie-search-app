@@ -1,6 +1,12 @@
 import { axios } from 'hooks/worker'
 import { IMovieAPIRes } from '../types/movie.d'
 
-const MOVIE_BASE_URL = 'http://www.omdbapi.com/?apikey=92e32667&s=iron%20man&page=5'
+const MOVIE_BASE_URL = 'http://www.omdbapi.com/?apikey='
 
-export const getMoviesApi = () => axios.get<IMovieAPIRes>(MOVIE_BASE_URL)
+interface Params {
+  searchWord: string
+  pageNum: number
+}
+
+export const getMoviesApi = ({ searchWord, pageNum }: Params) =>
+  axios.get<IMovieAPIRes>(`${MOVIE_BASE_URL}${process.env.REACT_APP_API_KEY}&s=${searchWord}&page=${pageNum}`)

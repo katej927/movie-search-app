@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styles from './TodoList.module.scss'
-import { CheckIcon } from '../../assets/svgs'
+// import { CheckIcon } from '../../assets/svgs'
 
 const INIT_TODO = [
   {
@@ -27,12 +27,12 @@ const TodoList = () => {
     // console.log('handleAddClick')
   }
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { dataset, checked } = e.currentTarget
     const { id } = dataset
 
-    setTodoList((prev) => {
-      const targetIndex = prev.findIndex((todo) => todo.id === Number(id))
+    setTodoList(prev => {
+      const targetIndex = prev.findIndex(todo => todo.id === Number(id))
       const newList = [...prev]
       newList[targetIndex].done = checked
       return newList
@@ -45,11 +45,11 @@ const TodoList = () => {
         <h1>Hi! this is your assignment.</h1>
         <ul className={styles.tasks}>
           <p className={styles.tasksTitle}>Today&apos;s</p>
-          {todoList.map((todo) => (
+          {todoList.map(todo => (
             <li key={`todo-${todo.id}`} className={styles.task}>
               <div className={styles.checkboxWrapper}>
                 <input type='checkbox' checked={todo.done} data-id={todo.id} onChange={handleChange} />
-                <CheckIcon />
+                {/* <CheckIcon /> */}
               </div>
               <p className={styles.title}>{todo.title}</p>
             </li>

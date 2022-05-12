@@ -2,7 +2,7 @@ import styles from './MovieLists.module.scss'
 import { ISearch } from 'types/movie'
 
 interface Props {
-  movieDatas?: Array<ISearch>
+  movieDatas: Array<ISearch>
 }
 
 const MovieLists = ({ movieDatas }: Props) => {
@@ -13,19 +13,19 @@ const MovieLists = ({ movieDatas }: Props) => {
         const keySetting = `${Title}-${idx}`
 
         return (
-          <dl className={styles.movieWrap} key={keySetting}>
+          <summary className={styles.movieWrap} key={keySetting}>
             {Poster === 'N/A' ? (
               <div className={styles.imgNix} />
             ) : (
               <img className={styles.movieImg} src={Poster} alt={Title} />
             )}
             <div className={styles.movieInfo}>
-              <dt>{Title}</dt>
-              <dd>
+              <h3>{Title}</h3>
+              <time>
                 {Year} / {Type}
-              </dd>
+              </time>
             </div>
-          </dl>
+          </summary>
         )
       })}
     </section>

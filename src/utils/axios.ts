@@ -28,7 +28,7 @@ const plainInstance = axios.create({
 })
 
 const instance = axios.create(baseSettings)
-instance.interceptors.request.use((config) => config, requestError)
+instance.interceptors.request.use(config => config, requestError)
 instance.interceptors.response.use(resolveResponse, responseError)
 
 const isAxiosError = <E>(err: unknown | AxiosError<E>): err is AxiosError => {

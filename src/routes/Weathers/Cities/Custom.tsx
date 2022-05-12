@@ -21,14 +21,14 @@ const WeatherCustom = () => {
   const handleSubmit = (e?: FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
 
-    if (!lat || !lon) return
-    getWeatherForecast5DaysApi({
-      lat: Number(lat),
-      lon: Number(lon),
-      units: 'metric',
-    }).then((res) => {
-      setData(res.data)
-    })
+    // if (!lat || !lon) return
+    // getWeatherForecast5DaysApi({
+    //   lat: Number(lat),
+    //   lon: Number(lon),
+    //   units: 'metric',
+    // }).then((res) => {
+    //   setData(res.data)
+    // })
   }
 
   const handleLatChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +53,7 @@ const WeatherCustom = () => {
         <h2>Next forecast</h2>
         {data ? (
           <ul>
-            {data.list.map((item) => (
+            {data.list.map(item => (
               <WeatherItem key={item.dt_txt} item={item} />
             ))}
           </ul>

@@ -9,13 +9,13 @@ const WeatherKwangmyung = () => {
   const [data, setData] = useState<IWeatherAPIRes>()
 
   useMount(() => {
-    getWeatherForecast5DaysApi({
-      lat: 37.494958,
-      lon: 126.844128,
-      units: 'metric',
-    }).then((res) => {
-      setData(res.data)
-    })
+    // getWeatherForecast5DaysApi({
+    //   lat: 37.494958,
+    //   lon: 126.844128,
+    //   units: 'metric',
+    // }).then((res) => {
+    //   setData(res.data)
+    // })
   })
 
   if (!data) return null
@@ -26,7 +26,7 @@ const WeatherKwangmyung = () => {
       <div className={styles.forecast}>
         <h2>Next forecast</h2>
         <ul>
-          {data.list.map((item) => (
+          {data.list.map(item => (
             <WeatherItem key={item.dt_txt} item={item} />
           ))}
         </ul>
