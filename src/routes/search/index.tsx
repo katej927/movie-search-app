@@ -1,8 +1,11 @@
-import { paramsGetMoviesApiState, IParamsGetMoviesApiState, moviesInSearchState } from '../../states/movie'
 import { useEffect, useState } from 'hooks'
 import { useRecoilState } from 'hooks/state'
-import { getMoviesApi } from 'services/movie'
+import { paramsGetMoviesApiState, IParamsGetMoviesApiState, moviesInSearchState } from '../../states/movie'
+
 import camelcaseKeys from 'camelcase-keys'
+import _, { uniqBy } from 'lodash'
+
+import { getMoviesApi } from 'services/movie'
 import { IMovie } from 'types/movie'
 
 import MovieLists from 'components/movieLists'
@@ -21,7 +24,8 @@ const Search = () => {
     getMoviesApi(paramsGetMoviesApi).then(res => {
       const { response, search } = camelcaseKeys(res.data)
       const resStatus = JSON.parse(response.toLowerCase())
-      const result = search?.map(originalData => ({ ...originalData, fav: false }))
+      const addFav = search?.map(originalData => ({ ...originalData, fav: false }))
+      const result = _.uniqBy(addFav, 'imdbID')
 
       return setShownMovies(resStatus ? result : [])
     })

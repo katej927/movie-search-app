@@ -1,5 +1,5 @@
 import { useClickAway, useRef } from 'hooks'
-import { useRecoilState, useSetRecoilState } from 'hooks/state'
+import { useRecoilState } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
 import { moviesInSearchState } from 'states/movie'
 import { addOrRemoveBtnText } from 'assets/texts'
