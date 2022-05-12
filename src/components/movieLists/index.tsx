@@ -2,29 +2,30 @@ import { useSetRecoilState } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
 import { cn } from 'styles'
 import styles from './MovieLists.module.scss'
-import { ISearch } from 'types/movie'
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
+import { IMovie } from 'types/movie'
 import { NO_RESULTS } from '../../assets/texts'
 
 const cx = cn.bind(styles)
 
 interface Props {
-  movieDatas: ISearch[]
+  movieDatas: IMovie[]
 }
 
 const MovieLists = ({ movieDatas }: Props) => {
   const setModalShow = useSetRecoilState<IModalState>(modalState)
 
-  const handleClick = () => setModalShow({ isShow: true, isInFavs: true })
+  const handleClick = (imdbID: string): void => setModalShow({ isShow: true, favId: imdbID })
 
   return (
     <section className={cx('movieLists', { emptyList: !movieDatas.length })}>
       {movieDatas.length ? (
         movieDatas?.map((movie, idx) => {
-          const { Title, Year, Type, Poster } = movie
+          const { Title, Year, Type, Poster, fav, imdbID } = movie
           const keySetting = `${Title}-${idx}`
 
           return (
-            <summary className={styles.movieWrap} key={keySetting} onClick={() => handleClick()}>
+            <summary className={styles.movieWrap} key={keySetting} onClick={() => handleClick(imdbID)}>
               {Poster === 'N/A' ? (
                 <div className={styles.imgNix} />
               ) : (
@@ -35,6 +36,7 @@ const MovieLists = ({ movieDatas }: Props) => {
                 <time>
                   {Year} / {Type}
                 </time>
+                {fav ? <MdFavorite /> : <MdFavoriteBorder />}
               </div>
             </summary>
           )
