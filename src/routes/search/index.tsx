@@ -3,7 +3,7 @@ import { useRecoilState } from 'hooks/state'
 import { paramsGetMoviesApiState, IParamsGetMoviesApiState, moviesInSearchState } from '../../states/movie'
 
 import camelcaseKeys from 'camelcase-keys'
-import _, { uniqBy } from 'lodash'
+import _ from 'lodash'
 
 import { getMoviesApi } from 'services/movie'
 import { IMovie } from 'types/movie'
@@ -13,7 +13,6 @@ import MovieLists from 'components/movieLists'
 const Search = () => {
   const [paramsGetMoviesApi, setParamsGetMoviesApi] = useRecoilState<IParamsGetMoviesApiState>(paramsGetMoviesApiState)
   const [shownMovies, setShownMovies] = useRecoilState<IMovie[]>(moviesInSearchState)
-
   const { searchWord, pageNum } = paramsGetMoviesApi
 
   const [target, setTarget] = useState<HTMLDivElement | null>(null)
@@ -21,6 +20,7 @@ const Search = () => {
   // Observer.displayName = 'Observer'
 
   useEffect(() => {
+    console.log('useEffect searchWord', searchWord)
     getMoviesApi(paramsGetMoviesApi).then(res => {
       const { response, search } = camelcaseKeys(res.data)
       const resStatus = JSON.parse(response.toLowerCase())
@@ -29,13 +29,13 @@ const Search = () => {
 
       return setShownMovies(resStatus ? result : [])
     })
-  }, [searchWord, pageNum, paramsGetMoviesApi])
+  }, [searchWord, pageNum])
 
-  useEffect(() => {
-    setParamsGetMoviesApi(prev => ({ ...prev, pageNum: pageNum + 1 }))
-  }, [target])
+  // useEffect(() => {
+  //   setParamsGetMoviesApi(prev => ({ ...prev, pageNum: pageNum + 1 }))
+  // }, [target])
 
-  console.log('shownMovies', shownMovies)
+  console.log('shownMovies', shownMovies, 'target', target)
 
   return <MovieLists movieDatas={shownMovies} />
 }

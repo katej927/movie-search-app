@@ -2,12 +2,15 @@ import { useClickAway, useRef } from 'hooks'
 import { useRecoilState } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
 import { moviesInSearchState } from 'states/movie'
-import { addOrRemoveBtnText } from 'assets/texts'
+import store from 'store'
+import _ from 'lodash'
 
 import styles from './Modal.module.scss'
 import { cn } from 'styles'
 
 import { IMovie } from 'types/movie'
+
+import { addOrRemoveBtnText } from 'assets/texts'
 
 const cx = cn.bind(styles)
 
@@ -16,8 +19,10 @@ const Modal = () => {
   const [moviesInSearch, setMoviesInSearch] = useRecoilState<IMovie[]>(moviesInSearchState)
   const { isShow, favId } = modalShow
 
-  const selectedMovieFav = moviesInSearch?.filter(movie => movie.imdbID === favId)[0].fav
-  const btnText = addOrRemoveBtnText(selectedMovieFav)
+  const selectedMovieFav = moviesInSearch?.filter(movie => movie.imdbID === favId)[0]
+  const { imdbID, fav } = selectedMovieFav
+
+  const btnText = addOrRemoveBtnText(fav)
 
   const ref = useRef(null)
   useClickAway(ref, () => {
@@ -26,10 +31,12 @@ const Modal = () => {
 
   const handleClick = (isCancelBtn: boolean): void => {
     if (!isCancelBtn) {
-      const updateFavInMovie = moviesInSearch?.map(({ fav, imdbID, ...movie }) => ({
+      fav ? store.remove(imdbID) : store.set(imdbID, selectedMovieFav)
+
+      const updateFavInMovie = moviesInSearch?.map(({ fav: favState, imdbID: id, ...movie }) => ({
         ...movie,
-        imdbID,
-        fav: imdbID === favId ? !fav : fav,
+        imdbID: id,
+        fav: id === favId ? !favState : favState,
       }))
       setMoviesInSearch(updateFavInMovie)
     }
