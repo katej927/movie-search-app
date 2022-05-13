@@ -2,11 +2,12 @@ import { useEffect, useState } from 'hooks'
 import { useRecoilState } from 'hooks/state'
 import { paramsGetMoviesApiState, IParamsGetMoviesApiState, moviesInSearchState } from '../../states/movie'
 
+import { getMoviesApi } from 'services/movie'
+import { IMovie, ISearch } from 'types/movie'
+
 import camelcaseKeys from 'camelcase-keys'
 import _ from 'lodash'
-
-import { getMoviesApi } from 'services/movie'
-import { IMovie } from 'types/movie'
+import store from 'store'
 
 import { MovieLists } from 'components'
 
@@ -21,7 +22,6 @@ const Search = () => {
 
   useEffect(() => {
     setIsLoading(true)
-    // setTimeout(() => {
     getMoviesApi(paramsGetMoviesApi).then(res => {
       const { response, search, totalResults } = camelcaseKeys(res.data)
 
@@ -30,19 +30,30 @@ const Search = () => {
       const isCorrectlyGetNext = (Number(totalResults) / 10) * pageNum === lengthOfGotMovies
       setIsLoading(!isGetAll || !isCorrectlyGetNext)
 
-      const addFavProp = search?.map(originalData => ({ ...originalData, fav: false }))
-      const resResultWithFav = _.uniqBy(addFavProp, 'imdbID')
+      const resResultWithFav = _.uniqBy(handleCheckMoviesInFavs(search), 'imdbID')
 
       const resStatus = JSON.parse(response.toLowerCase())
+
+      // handleCheckMoviesInFavs(resResultWithFav)
 
       setIsNoResult(!resStatus)
       if (!resStatus) setShownMovies([])
       if (pageNum === 1) setShownMovies(resResultWithFav)
       if (pageNum > 1) setShownMovies(shownMovies.concat(resResultWithFav))
     })
-    // }, 1000)
     setIsLoading(false)
   }, [searchWord, pageNum])
+
+  function handleCheckMoviesInFavs(search: ISearch[]) {
+    const inFavs: string[] = []
+    store.each((val, key) => inFavs.push(key))
+
+    return search?.map(({ imdbID, ...originalData }) => ({
+      ...originalData,
+      imdbID,
+      fav: !!inFavs.includes(imdbID),
+    }))
+  }
 
   // 무한 스크롤
   useEffect(() => {
@@ -56,7 +67,9 @@ const Search = () => {
 
   const callback: IntersectionObserverCallback = ([entry], observer) => {
     if (entry.isIntersecting && target) {
-      setParamsGetMoviesApi(prev => ({ ...prev, pageNum: pageNum + 1 }))
+      setTimeout(() => {
+        setParamsGetMoviesApi(prev => ({ ...prev, pageNum: pageNum + 1 }))
+      }, 1000)
       observer.observe(target)
     }
   }

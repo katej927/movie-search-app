@@ -4,6 +4,7 @@ import { modalState, IModalState } from 'states/modal'
 import { cn } from 'styles'
 import styles from './MovieLists.module.scss'
 import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
+import ReactLoading from 'react-loading'
 import { IMovie } from 'types/movie'
 import { NO_RESULTS } from '../../assets/texts'
 
@@ -50,7 +51,7 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading }: Props) => 
       )}
       {movieDatas.length && isLoading && (
         <div className={cx('loading')} ref={setTarget}>
-          Loading...
+          <ReactLoading type='spinningBubbles' height='45px' width='45px' />
         </div>
       )}
     </section>

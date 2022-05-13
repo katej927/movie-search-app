@@ -23,6 +23,10 @@
     }
   }
 
+  .loading {
+    @include flexbox.flexbox(center, center);
+  }
+
   .movieWrap {
     $movieHeight: 65px;
     display: flex;
