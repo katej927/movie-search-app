@@ -4,7 +4,7 @@ import loadable from '@loadable/component'
 import TodoList from './TodoList'
 import Weather from './Weathers'
 import Layout from './layout'
-import Loading from 'components/loading'
+import { Loading } from 'components'
 
 const Search = loadable(() => import('./search'))
 const Favs = loadable(() => import('./favs'))

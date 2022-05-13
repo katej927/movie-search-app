@@ -3,9 +3,7 @@ import { Helmet } from 'react-helmet-async'
 
 import styles from './Layout.module.scss'
 
-import Tab from 'components/tab'
-import Header from 'components/header'
-import Modal from 'components/modal'
+import { Tab, Header, Modal } from 'components'
 import { modalState, IModalState } from 'states/modal'
 import { useRecoilValue } from 'hooks/state'
 

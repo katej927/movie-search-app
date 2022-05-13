@@ -8,7 +8,7 @@ import _ from 'lodash'
 import { getMoviesApi } from 'services/movie'
 import { IMovie } from 'types/movie'
 
-import MovieLists from 'components/movieLists'
+import { MovieLists } from 'components'
 
 const Search = () => {
   const [paramsGetMoviesApi, setParamsGetMoviesApi] = useRecoilState<IParamsGetMoviesApiState>(paramsGetMoviesApiState)
@@ -20,7 +20,6 @@ const Search = () => {
   // Observer.displayName = 'Observer'
 
   useEffect(() => {
-    console.log('useEffect searchWord', searchWord)
     getMoviesApi(paramsGetMoviesApi).then(res => {
       const { response, search } = camelcaseKeys(res.data)
       const resStatus = JSON.parse(response.toLowerCase())
@@ -34,9 +33,6 @@ const Search = () => {
   // useEffect(() => {
   //   setParamsGetMoviesApi(prev => ({ ...prev, pageNum: pageNum + 1 }))
   // }, [target])
-
-  console.log('shownMovies', shownMovies, 'target', target)
-
   return <MovieLists movieDatas={shownMovies} />
 }
 

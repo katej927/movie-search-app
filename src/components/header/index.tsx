@@ -25,9 +25,6 @@ const Header = () => {
   const handleChange = ({ currentTarget: { value } }: ChangeEvent<HTMLInputElement>): void => {
     setText(value)
   }
-
-  console.log('paramsGetMoviesApi', paramsGetMoviesApi)
-
   return (
     <header className={cx('header')}>
       <form className={cx('form')}>

@@ -3,7 +3,6 @@ import { useRecoilState } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
 import { moviesInSearchState } from 'states/movie'
 import store from 'store'
-import _ from 'lodash'
 
 import styles from './Modal.module.scss'
 import { cn } from 'styles'
@@ -31,13 +30,14 @@ const Modal = () => {
 
   const handleClick = (isCancelBtn: boolean): void => {
     if (!isCancelBtn) {
-      fav ? store.remove(imdbID) : store.set(imdbID, selectedMovieFav)
-
       const updateFavInMovie = moviesInSearch?.map(({ fav: favState, imdbID: id, ...movie }) => ({
         ...movie,
         imdbID: id,
         fav: id === favId ? !favState : favState,
       }))
+
+      fav ? store.remove(imdbID) : store.set(imdbID, { ...selectedMovieFav, fav: !fav })
+
       setMoviesInSearch(updateFavInMovie)
     }
     setModalShow(prev => ({ ...prev, isShow: false }))
