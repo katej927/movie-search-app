@@ -16,7 +16,7 @@ const Search = () => {
   const [shownMovies, setShownMovies] = useRecoilState<IMovie[]>(moviesInSearchState)
   const { searchWord, pageNum } = paramsGetMoviesApi
 
-  const [isLoading, setIsLoading] = useState(false) // 수정 필요
+  const [isLoading, setIsLoading] = useState(false)
   const [target, setTarget] = useState<HTMLElement | null | undefined>(null)
   const [isNoResult, setIsNoResult] = useState<boolean>(false)
 
@@ -25,7 +25,7 @@ const Search = () => {
     getMoviesApi(paramsGetMoviesApi).then(res => {
       const { response, search, totalResults } = camelcaseKeys(res.data)
 
-      const lengthOfGotMovies = shownMovies.length + search.length
+      const lengthOfGotMovies = shownMovies.length ?? 0 + search.length ?? 0
       const isGetAll = lengthOfGotMovies === Number(totalResults)
       const isCorrectlyGetNext = (Number(totalResults) / 10) * pageNum === lengthOfGotMovies
       setIsLoading(!isGetAll || !isCorrectlyGetNext)
@@ -33,9 +33,6 @@ const Search = () => {
       const resResultWithFav = _.uniqBy(handleCheckMoviesInFavs(search), 'imdbID')
 
       const resStatus = JSON.parse(response.toLowerCase())
-
-      // handleCheckMoviesInFavs(resResultWithFav)
-
       setIsNoResult(!resStatus)
       if (!resStatus) setShownMovies([])
       if (pageNum === 1) setShownMovies(resResultWithFav)

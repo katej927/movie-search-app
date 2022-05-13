@@ -16,10 +16,11 @@ const cx = cn.bind(styles)
 const Modal = () => {
   const [modalShow, setModalShow] = useRecoilState<IModalState>(modalState)
   const [moviesInSearch, setMoviesInSearch] = useRecoilState<IMovie[]>(moviesInSearchState)
-  const { isShow, favId } = modalShow
-
-  const selectedMovieFav = moviesInSearch?.filter(movie => movie.imdbID === favId)[0]
-  const { imdbID, fav } = selectedMovieFav
+  const {
+    isShow,
+    selectedMovie,
+    selectedMovie: { imdbID, fav },
+  } = modalShow
 
   const btnText = addOrRemoveBtnText(fav)
 
@@ -30,12 +31,12 @@ const Modal = () => {
 
   const handleClick = (isCancelBtn: boolean): void => {
     if (!isCancelBtn) {
-      fav ? store.remove(imdbID) : store.set(imdbID, { ...selectedMovieFav, fav: !fav })
+      fav ? store.remove(imdbID) : store.set(imdbID, { ...selectedMovie, fav: !fav })
 
       const updateFavInMovie = moviesInSearch?.map(({ fav: favState, imdbID: id, ...movie }) => ({
         ...movie,
         imdbID: id,
-        fav: id === favId ? !favState : favState,
+        fav: id === imdbID ? !favState : favState,
       }))
       setMoviesInSearch(updateFavInMovie)
     }

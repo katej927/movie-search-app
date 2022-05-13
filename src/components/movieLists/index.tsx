@@ -20,17 +20,18 @@ interface Props {
 const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading }: Props) => {
   const setModalShow = useSetRecoilState<IModalState>(modalState)
 
-  const handleClick = (imdbID: string): void => setModalShow({ isShow: true, favId: imdbID })
+  const handleClick = (movie: IMovie): void => setModalShow({ isShow: true, selectedMovie: movie })
 
+  console.log('!isNoResult', !isNoResult)
   return (
     <section className={cx('movieLists', { emptyList: !movieDatas.length })}>
       {!isNoResult ? (
         movieDatas?.map((movie, idx) => {
-          const { Title, Year, Type, Poster, fav, imdbID } = movie
+          const { Title, Year, Type, Poster, fav } = movie
           const keySetting = `${Title}-${idx}`
 
           return (
-            <summary className={cx('movieWrap')} key={keySetting} onClick={() => handleClick(imdbID)}>
+            <summary className={cx('movieWrap')} key={keySetting} onClick={() => handleClick(movie)}>
               {Poster === 'N/A' ? (
                 <div className={cx('imgNix')} />
               ) : (
@@ -49,7 +50,7 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading }: Props) => 
       ) : (
         <span className={cx('noResults')}>{NO_RESULTS}</span>
       )}
-      {movieDatas.length && isLoading && (
+      {!isNoResult && isLoading && (
         <div className={cx('loading')} ref={setTarget}>
           <ReactLoading type='spinningBubbles' height='45px' width='45px' />
         </div>

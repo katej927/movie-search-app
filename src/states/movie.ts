@@ -8,7 +8,7 @@ export interface IParamsGetMoviesApiState {
 
 export const paramsGetMoviesApiState = atom<IParamsGetMoviesApiState>({
   key: '#paramsGetMoviesApiState',
-  default: { searchWord: 'iron man', pageNum: 1 },
+  default: { searchWord: '', pageNum: 1 },
 })
 
 export const moviesInSearchState = atom<IMovie[]>({
