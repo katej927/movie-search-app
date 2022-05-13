@@ -15,25 +15,52 @@ const Search = () => {
   const [shownMovies, setShownMovies] = useRecoilState<IMovie[]>(moviesInSearchState)
   const { searchWord, pageNum } = paramsGetMoviesApi
 
-  const [target, setTarget] = useState<HTMLDivElement | null>(null)
-  // const Observer = forwardRef<HTMLDivElement>(ref => <div ref={ref} />)
-  // Observer.displayName = 'Observer'
+  const [isLoading, setIsLoading] = useState(false) // 수정 필요
+  const [target, setTarget] = useState<HTMLElement | null | undefined>(null)
+  const [isNoResult, setIsNoResult] = useState<boolean>(false)
 
   useEffect(() => {
+    setIsLoading(true)
+    // setTimeout(() => {
     getMoviesApi(paramsGetMoviesApi).then(res => {
-      const { response, search } = camelcaseKeys(res.data)
-      const resStatus = JSON.parse(response.toLowerCase())
-      const addFav = search?.map(originalData => ({ ...originalData, fav: false }))
-      const result = _.uniqBy(addFav, 'imdbID')
+      const { response, search, totalResults } = camelcaseKeys(res.data)
 
-      return setShownMovies(resStatus ? result : [])
+      const lengthOfGotMovies = shownMovies.length + search.length
+      const isGetAll = lengthOfGotMovies === Number(totalResults)
+      const isCorrectlyGetNext = (Number(totalResults) / 10) * pageNum === lengthOfGotMovies
+      setIsLoading(!isGetAll || !isCorrectlyGetNext)
+
+      const addFavProp = search?.map(originalData => ({ ...originalData, fav: false }))
+      const resResultWithFav = _.uniqBy(addFavProp, 'imdbID')
+
+      const resStatus = JSON.parse(response.toLowerCase())
+
+      setIsNoResult(!resStatus)
+      if (!resStatus) setShownMovies([])
+      if (pageNum === 1) setShownMovies(resResultWithFav)
+      if (pageNum > 1) setShownMovies(shownMovies.concat(resResultWithFav))
     })
+    // }, 1000)
+    setIsLoading(false)
   }, [searchWord, pageNum])
 
-  // useEffect(() => {
-  //   setParamsGetMoviesApi(prev => ({ ...prev, pageNum: pageNum + 1 }))
-  // }, [target])
-  return <MovieLists movieDatas={shownMovies} />
+  // 무한 스크롤
+  useEffect(() => {
+    let observer: IntersectionObserver
+    if (target) {
+      observer = new IntersectionObserver(callback, { threshold: 1 })
+      observer.observe(target)
+    }
+    return () => observer && observer.disconnect()
+  }, [target])
+
+  const callback: IntersectionObserverCallback = ([entry], observer) => {
+    if (entry.isIntersecting && target) {
+      setParamsGetMoviesApi(prev => ({ ...prev, pageNum: pageNum + 1 }))
+      observer.observe(target)
+    }
+  }
+  return <MovieLists movieDatas={shownMovies} setTarget={setTarget} isNoResult={isNoResult} isLoading={isLoading} />
 }
 
 export default Search
