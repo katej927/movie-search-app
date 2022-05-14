@@ -1,20 +1,20 @@
 import { useEffect, useState, memo } from 'hooks'
 import { useRecoilValue } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
-import { MovieLists } from 'components'
+import { MovieList } from 'components'
 import store from 'store'
 
 import { IMovie } from 'types/movie'
 
 const Favs = () => {
   const modalStatus = useRecoilValue<IModalState>(modalState)
-  const [movieLists, setMovieLists] = useState<IMovie[]>(store.get('favs'))
+  const [movieList, setMovieList] = useState<IMovie[]>(store.get('favs'))
 
   useEffect(() => {
-    setMovieLists(store.get('favs'))
+    setMovieList(store.get('favs'))
   }, [modalStatus])
 
-  return <MovieLists movieDatas={movieLists} setMovieLists={setMovieLists} ActiveDnd />
+  return <MovieList movieDatas={movieList} setMovieLists={setMovieList} ActiveDnd />
 }
 
 export default memo(Favs)

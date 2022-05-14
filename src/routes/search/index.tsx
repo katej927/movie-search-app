@@ -8,7 +8,7 @@ import store from 'store'
 import { getMoviesApi } from 'services/movie'
 import { IMovie, ISearch } from 'types/movie'
 
-import { MovieLists } from 'components'
+import { MovieList } from 'components'
 
 const Search = () => {
   const [paramsGetMoviesApi, setParamsGetMoviesApi] = useRecoilState<IParamsGetMoviesApiState>(paramsGetMoviesApiState)
@@ -77,7 +77,7 @@ const Search = () => {
   }, [target, callback])
 
   return (
-    <MovieLists
+    <MovieList
       movieDatas={shownMovies}
       setTarget={setTarget}
       isNoResult={isNoResult}

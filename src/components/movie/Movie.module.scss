@@ -1,0 +1,47 @@
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/sizes';
+
+.movieWrap {
+  $movieHeight: 150px;
+  display: flex;
+  justify-content: space-between;
+  height: $movieHeight;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: rgba(white, 10%);
+  border-radius: sizes.$BORDER_RADIUS_GENERAL;
+
+  &:hover {
+    background-color: rgba(white, 20%);
+  }
+
+  .imgNix {
+    width: $movieHeight;
+    height: inherit;
+    background-color: transparent;
+  }
+
+  .movieImg {
+    width: 110px;
+    height: inherit;
+  }
+
+  .movieInfo {
+    @include flexbox.flexbox(end, center);
+    position: relative;
+    width: 150px;
+    margin: 10px;
+    text-align: end;
+
+    .title {
+      margin-bottom: 8px;
+      font-size: sizes.$FONT_SIZE_MEDIUM;
+      color: var(--text-gray-001);
+    }
+
+    time {
+      font-size: sizes.$FONT_SIZE_REGULAR;
+      color: var(--text-gray-002);
+    }
+  }
+}

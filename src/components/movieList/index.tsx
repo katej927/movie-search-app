@@ -1,16 +1,15 @@
-import { Dispatch, SetStateAction, CSSProperties, memo } from 'react'
+import { Dispatch, SetStateAction, memo } from 'react'
 import { useSetRecoilState } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 import store from 'store'
 
-import { Loading } from 'components'
+import { Loading, Movie } from 'components'
 import { IMovie } from 'types/movie'
 import { NO_RESULTS } from '../../assets/texts'
 
 import { cn } from 'styles'
-import styles from './MovieLists.module.scss'
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
+import styles from './MovieList.module.scss'
 
 const cx = cn.bind(styles)
 
@@ -41,13 +40,6 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
     setMovieLists && setMovieLists(getPrevFavs)
   }
 
-  const iconStyles: CSSProperties = {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    color: '#ff3c79',
-  }
-
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <Droppable droppableId='movieLists' isDropDisabled={!ActiveDnd}>
@@ -59,43 +51,11 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
           >
             {movieDatas?.length || !isNoResult ? (
               movieDatas?.map((movie, idx) => {
-                const { Title, Year, Type, Poster, fav } = movie
-                const keySetting = `${Title}-${idx}`
-                const dragKeySetting = `drag-${Title}-${idx}`
+                const { Title } = movie
+                const key = `${Title}-${idx}`
+                const dragKey = `drag-${Title}-${idx}`
 
-                return (
-                  <Draggable key={dragKeySetting} draggableId={dragKeySetting} index={idx}>
-                    {providedChild => (
-                      <summary
-                        className={cx('movieWrap')}
-                        key={keySetting}
-                        onClick={() => handleClick(movie)}
-                        ref={providedChild.innerRef}
-                        {...providedChild.dragHandleProps}
-                        {...providedChild.draggableProps}
-                      >
-                        {Poster === 'N/A' ? (
-                          <div className={cx('imgNix')} />
-                        ) : (
-                          <img className={cx('movieImg')} src={Poster} alt={Title} />
-                        )}
-                        <div className={cx('movieInfo')}>
-                          {fav ? (
-                            <AiFillStar style={iconStyles} size={20} />
-                          ) : (
-                            <AiOutlineStar style={iconStyles} size={20} />
-                          )}
-                          <div>
-                            <h3 className={cx('title')}>{Title}</h3>
-                            <time>
-                              {Year} / {Type}
-                            </time>
-                          </div>
-                        </div>
-                      </summary>
-                    )}
-                  </Draggable>
-                )
+                return <Movie key={key} dragKey={dragKey} handleClick={handleClick} idx={idx} movie={movie} />
               })
             ) : (
               <span className={cx('noResults')}>{NO_RESULTS}</span>
