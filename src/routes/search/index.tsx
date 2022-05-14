@@ -42,13 +42,12 @@ const Search = () => {
   }, [searchWord, pageNum])
 
   function handleCheckMoviesInFavs(search: ISearch[]) {
-    const inFavs: string[] = []
-    store.each((val, key) => inFavs.push(key))
+    const inFavsID: string[] = store.get('favs').map(({ imdbID }: IMovie) => imdbID)
 
     return search?.map(({ imdbID, ...originalData }) => ({
       ...originalData,
       imdbID,
-      fav: !!inFavs.includes(imdbID),
+      fav: !!inFavsID.includes(imdbID),
     }))
   }
 
@@ -70,7 +69,15 @@ const Search = () => {
       observer.observe(target)
     }
   }
-  return <MovieLists movieDatas={shownMovies} setTarget={setTarget} isNoResult={isNoResult} isLoading={isLoading} />
+  return (
+    <MovieLists
+      movieDatas={shownMovies}
+      setTarget={setTarget}
+      isNoResult={isNoResult}
+      isLoading={isLoading}
+      ActiveDnd={false}
+    />
+  )
 }
 
 export default Search

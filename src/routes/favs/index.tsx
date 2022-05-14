@@ -8,15 +8,13 @@ import { IMovie } from 'types/movie'
 
 const Favs = () => {
   const modalStatus = useRecoilValue(modalState)
-  const [movieLists, setMovieLists] = useState<IMovie[]>([])
+  const [movieLists, setMovieLists] = useState<IMovie[]>(store.get('favs'))
 
   useEffect(() => {
-    const collectFavMovies: IMovie[] = []
-    store.each(value => collectFavMovies.push(value))
-    setMovieLists(collectFavMovies)
+    setMovieLists(store.get('favs'))
   }, [modalStatus])
 
-  return <MovieLists movieDatas={movieLists} />
+  return <MovieLists movieDatas={movieLists} setMovieLists={setMovieLists} ActiveDnd />
 }
 
 export default Favs

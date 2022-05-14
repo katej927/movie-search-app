@@ -31,7 +31,14 @@ const Modal = () => {
 
   const handleClick = (isCancelBtn: boolean): void => {
     if (!isCancelBtn) {
-      fav ? store.remove(imdbID) : store.set(imdbID, { ...selectedMovie, fav: !fav })
+      if (fav) {
+        const reorderedMovies = store.get('favs').filter(({ imdbID: storeId }: IMovie) => storeId !== imdbID)
+        store.set('favs', reorderedMovies)
+      } else {
+        const prevFavs = store.get('favs')
+        prevFavs.push(selectedMovie)
+        store.set('favs', prevFavs)
+      }
 
       const updateFavInMovie = moviesInSearch?.map(({ fav: favState, imdbID: id, ...movie }) => ({
         ...movie,
