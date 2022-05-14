@@ -29,23 +29,27 @@ const Modal = () => {
     setModalShow(prev => ({ ...prev, isShow: false }))
   })
 
+  const updateFavInMovie = (movies: IMovie[]) => {
+    return movies.map(({ fav: favState, imdbID: id, ...movie }) => ({
+      ...movie,
+      imdbID: id,
+      fav: id === imdbID ? !favState : favState,
+    }))
+  }
+
   const handleClick = (isCancelBtn: boolean): void => {
     if (!isCancelBtn) {
+      const getFavs = store.get('favs')
       if (fav) {
-        const reorderedMovies = store.get('favs').filter(({ imdbID: storeId }: IMovie) => storeId !== imdbID)
-        store.set('favs', reorderedMovies)
+        const reorderedMovies = getFavs.filter(({ imdbID: storeId }: IMovie) => storeId !== imdbID)
+        store.set('favs', updateFavInMovie(reorderedMovies))
       } else {
-        const prevFavs = store.get('favs')
+        const prevFavs = getFavs || []
         prevFavs.push(selectedMovie)
-        store.set('favs', prevFavs)
+        store.set('favs', updateFavInMovie(prevFavs))
       }
 
-      const updateFavInMovie = moviesInSearch?.map(({ fav: favState, imdbID: id, ...movie }) => ({
-        ...movie,
-        imdbID: id,
-        fav: id === imdbID ? !favState : favState,
-      }))
-      setMoviesInSearch(updateFavInMovie)
+      setMoviesInSearch(updateFavInMovie(moviesInSearch))
     }
     setModalShow(prev => ({ ...prev, isShow: false }))
   }

@@ -42,7 +42,8 @@ const Search = () => {
   }, [searchWord, pageNum])
 
   function handleCheckMoviesInFavs(search: ISearch[]) {
-    const inFavsID: string[] = store.get('favs').map(({ imdbID }: IMovie) => imdbID)
+    const getFavs = store.get('favs')
+    const inFavsID: string[] = getFavs ? getFavs.map(({ imdbID }: IMovie) => imdbID) : []
 
     return search?.map(({ imdbID, ...originalData }) => ({
       ...originalData,

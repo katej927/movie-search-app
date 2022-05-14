@@ -46,7 +46,7 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
       <Droppable droppableId='movieLists' isDropDisabled={!ActiveDnd}>
         {provided => (
           <section
-            className={cx('movieLists', { emptyList: !movieDatas.length })}
+            className={cx('movieLists', { emptyList: !movieDatas?.length })}
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
