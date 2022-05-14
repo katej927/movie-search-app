@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent } from 'react'
+import { useState, ChangeEvent, FormEvent, memo } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useSetRecoilState } from 'hooks/state'
 import { paramsGetMoviesApiState, IParamsGetMoviesApiState } from 'states/movie'
@@ -50,4 +50,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default memo(Header)

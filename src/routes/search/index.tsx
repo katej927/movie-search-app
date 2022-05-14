@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'hooks'
+import { useEffect, useState, useCallback, memo } from 'hooks'
 import { useRecoilState } from 'hooks/state'
 import { paramsGetMoviesApiState, IParamsGetMoviesApiState, moviesInSearchState } from '../../states/movie'
 import camelcaseKeys from 'camelcase-keys'
@@ -87,4 +87,4 @@ const Search = () => {
   )
 }
 
-export default Search
+export default memo(Search)

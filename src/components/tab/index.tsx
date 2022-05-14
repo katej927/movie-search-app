@@ -1,3 +1,4 @@
+import { memo } from 'hooks'
 import { NavLink } from 'react-router-dom'
 
 import { TABS } from './TabInfos'
@@ -26,4 +27,4 @@ const Tab = () => {
     </nav>
   )
 }
-export default Tab
+export default memo(Tab)

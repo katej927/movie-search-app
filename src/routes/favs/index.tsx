@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'hooks'
+import { useEffect, useState, memo } from 'hooks'
 import { useRecoilValue } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
 import { MovieLists } from 'components'
@@ -17,4 +17,4 @@ const Favs = () => {
   return <MovieLists movieDatas={movieLists} setMovieLists={setMovieLists} ActiveDnd />
 }
 
-export default Favs
+export default memo(Favs)

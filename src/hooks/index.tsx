@@ -12,6 +12,7 @@ export {
   useReducer,
   useRef,
   forwardRef,
+  memo,
 } from 'react'
 
 export function useMounted(): boolean {

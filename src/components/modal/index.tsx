@@ -1,4 +1,4 @@
-import { useClickAway, useRef } from 'hooks'
+import { useClickAway, useRef, memo } from 'hooks'
 import { useRecoilState } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
 import { moviesInSearchState } from 'states/movie'
@@ -71,4 +71,4 @@ const Modal = () => {
   )
 }
 
-export default Modal
+export default memo(Modal)

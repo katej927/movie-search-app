@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, CSSProperties } from 'react'
+import { Dispatch, SetStateAction, CSSProperties, memo } from 'react'
 import { useSetRecoilState } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
@@ -113,4 +113,4 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
   )
 }
 
-export default MovieLists
+export default memo(MovieLists)

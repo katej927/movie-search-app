@@ -1,3 +1,4 @@
+import { memo } from 'hooks'
 import ReactLoading from 'react-loading'
 
 import styles from './Loading.module.scss'
@@ -18,4 +19,4 @@ const Loading = ({ height, width }: Props) => {
   )
 }
 
-export default Loading
+export default memo(Loading)
