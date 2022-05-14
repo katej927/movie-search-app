@@ -22,7 +22,7 @@ const Modal = () => {
     selectedMovie: { imdbID, fav },
   } = modalShow
 
-  const btnText = addOrRemoveBtnText(fav)
+  const btnText: string[] = addOrRemoveBtnText(fav)
 
   const ref = useRef(null)
   useClickAway(ref, () => {
@@ -57,12 +57,15 @@ const Modal = () => {
   return (
     <div className={cx('overlay', { hide: !isShow })}>
       <section className={styles.content} ref={ref}>
-        <button type='button' onClick={() => handleClick(false)}>
-          {btnText}
-        </button>
-        <button type='button' onClick={() => handleClick(true)}>
-          취소
-        </button>
+        <span>{btnText[0]}</span>
+        <div className={cx('btnWrap')}>
+          <button type='button' onClick={() => handleClick(false)}>
+            {btnText[1]}
+          </button>
+          <button type='button' onClick={() => handleClick(true)}>
+            취소
+          </button>
+        </div>
       </section>
     </div>
   )

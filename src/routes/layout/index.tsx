@@ -14,6 +14,7 @@ const Layout = () => {
     <div className={styles.appWrapper}>
       <Helmet>
         <title>Movie Search App</title>
+        <meta httpEquiv='Content-Security-Policy' content='upgrade-insecure-requests' />
       </Helmet>
       <main className={styles.app}>
         {isShow && <Modal />}

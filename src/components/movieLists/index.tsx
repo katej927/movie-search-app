@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, CSSProperties } from 'react'
 import { useSetRecoilState } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
 import ReactLoading from 'react-loading'
@@ -7,7 +7,7 @@ import store from 'store'
 
 import { cn } from 'styles'
 import styles from './MovieLists.module.scss'
-import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 
 import { IMovie } from 'types/movie'
 import { NO_RESULTS } from '../../assets/texts'
@@ -41,6 +41,14 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
     setMovieLists && setMovieLists(getPrevFavs)
   }
 
+  const iconStyles: CSSProperties = {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    color: '#ff3c79',
+  }
+
+  console.log('!movieDatas?.length', !movieDatas?.length)
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <Droppable droppableId='movieLists' isDropDisabled={!ActiveDnd}>
@@ -73,11 +81,17 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
                           <img className={cx('movieImg')} src={Poster} alt={Title} />
                         )}
                         <div className={cx('movieInfo')}>
-                          <h3>{Title}</h3>
-                          <time>
-                            {Year} / {Type}
-                          </time>
-                          {fav ? <MdFavorite /> : <MdFavoriteBorder />}
+                          {fav ? (
+                            <AiFillStar style={iconStyles} size={20} />
+                          ) : (
+                            <AiOutlineStar style={iconStyles} size={20} />
+                          )}
+                          <div>
+                            <h3 className={cx('title')}>{Title}</h3>
+                            <time>
+                              {Year} / {Type}
+                            </time>
+                          </div>
                         </div>
                       </summary>
                     )}

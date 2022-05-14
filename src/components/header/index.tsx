@@ -1,5 +1,6 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, FormEvent } from 'react'
 import { useLocation } from 'react-router-dom'
+// import { useSetRecoilState } from 'hooks/state'
 import { useRecoilState } from 'hooks/state'
 import { paramsGetMoviesApiState } from 'states/movie'
 
@@ -11,13 +12,14 @@ const cx = cn.bind(styles)
 
 const Header = () => {
   const [paramsGetMoviesApi, setParamsGetMoviesApi] = useRecoilState(paramsGetMoviesApiState)
+
+  // const setParamsGetMoviesApi = useSetRecoilState(paramsGetMoviesApiState)
   const [text, setText] = useState<string>('')
 
   const location = useLocation()
-  console.log('location', location.pathname)
 
-  const handleClick = () => {
-    console.log('handleSubmit')
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     setParamsGetMoviesApi({ searchWord: text, pageNum: 1 })
     setText('')
   }
@@ -25,13 +27,11 @@ const Header = () => {
     setText(value)
   }
 
-  console.log('paramsGetMoviesApi', paramsGetMoviesApi.searchWord, 'text', text)
-
+  console.log('location', location)
   return (
     <header className={cx('header')}>
       {location.pathname === '/' ? (
-        // <form className={cx('form')}> // 임시로 처리해둠
-        <>
+        <form className={cx('form')} onSubmit={handleSubmit}>
           <input
             className={cx('searchInput')}
             type='search'
@@ -39,14 +39,14 @@ const Header = () => {
             placeholder='제목으로 입력'
             onChange={handleChange}
             value={text}
+            autoComplete='off'
           />
-          <button className={cx('btn')} type='submit' onClick={handleClick}>
-            <BiSearch size={25} color='#666666' />
+          <button className={cx('btn')} type='submit'>
+            <BiSearch size={25} color='#fff' />
           </button>
-        </>
+        </form>
       ) : (
-        // </form>
-        <h1>내 즐겨찾기</h1>
+        <h1 className={cx('title')}>My Favorites</h1>
       )}
     </header>
   )

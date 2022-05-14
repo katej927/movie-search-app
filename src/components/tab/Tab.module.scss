@@ -1,15 +1,19 @@
 @use '/src/styles/constants/colors';
 @use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/sizes';
 
 .tab {
   display: flex;
   justify-content: center;
-  padding: 17px 0;
-  border-bottom: 1px solid #eeeeee;
+  padding: 13px 0;
 
   ul {
     @include flexbox.flexbox(space-evenly, center);
     width: 100%;
+
+    a {
+      font-size: sizes.$FONT_SIZE_SMALL;
+    }
   }
 
   a {

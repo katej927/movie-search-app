@@ -1,7 +1,8 @@
 import { AiOutlineStar } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
+import { BsBookmarkStarFill } from 'react-icons/bs'
 
 export const TABS = [
-  { title: '검색', icon: <BiSearch />, to: '/' },
-  { title: '즐겨 찾기', icon: <AiOutlineStar />, to: 'favs' },
+  { icon: <BiSearch size={25} />, to: '/' },
+  { icon: <BsBookmarkStarFill size={22} />, to: 'favs' },
 ]
