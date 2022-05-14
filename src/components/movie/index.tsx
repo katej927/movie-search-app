@@ -35,7 +35,6 @@ const Movie = ({ handleClick, index, movie }: Props) => {
           ref={providedChild.innerRef}
           {...providedChild.dragHandleProps}
           {...providedChild.draggableProps}
-          // style={style}
         >
           {Poster === 'N/A' ? (
             <div className={cx(styles.imgNix)} />

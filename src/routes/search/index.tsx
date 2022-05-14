@@ -17,7 +17,7 @@ const Search = () => {
 
   const [isLoading, setIsLoading] = useState(false)
   const [target, setTarget] = useState<HTMLElement | null | undefined>(null)
-  const [isNoResult, setIsNoResult] = useState<boolean>(false)
+  const [isNoResult, setIsNoResult] = useState<boolean>(true)
 
   useEffect(() => {
     setIsLoading(true)
@@ -34,6 +34,8 @@ const Search = () => {
       const resResultWithFav = _.uniqBy(handleCheckMoviesInFavs(search), 'imdbID')
 
       const resStatus = JSON.parse(response.toLowerCase())
+      console.log('resStatus', resStatus)
+
       setIsNoResult(!resStatus)
       if (!resStatus) setShownMovies([])
       if (pageNumber === 1) setShownMovies(resResultWithFav)

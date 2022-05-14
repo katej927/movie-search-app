@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, memo, useCallback, CSSProperties } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useSetRecoilState } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
@@ -7,7 +8,7 @@ import store from 'store'
 
 import { Loading, Movie } from 'components'
 import { IMovie } from 'types/movie'
-import { NO_RESULTS } from '../../assets/texts'
+import { NO_RESULTS, NO_FAVS } from '../../assets/texts'
 
 import { cn } from 'styles'
 import styles from './MovieList.module.scss'
@@ -31,6 +32,7 @@ interface IRowRender {
 
 const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieLists, ActiveDnd }: Props) => {
   const setModalShow = useSetRecoilState<IModalState>(modalState)
+  const location = useLocation()
 
   const handleClick = useCallback(
     (movie: IMovie) => setModalShow({ isShow: true, selectedMovie: movie }),
@@ -68,7 +70,7 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {movieDatas?.length || !isNoResult ? (
+            {movieDatas?.length ? (
               <List
                 className={styles.movieList}
                 width={320}
@@ -79,7 +81,7 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
                 list={movieDatas}
               />
             ) : (
-              <span className={cx('noResults')}>{NO_RESULTS}</span>
+              <span className={cx('noResults')}>{location.pathname === '/' ? NO_RESULTS : NO_FAVS}</span>
             )}
             {!isNoResult && isLoading && (
               <div className={cx('loading')} ref={setTarget}>

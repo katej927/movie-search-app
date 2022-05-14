@@ -4,4 +4,6 @@ export const addOrRemoveBtnText = (isInFavs: boolean): string[] => {
 
 export const NO_RESULTS = '검색 결과가 없습니다.'
 
+export const NO_FAVS = '즐겨 찾기 목록이 없습니다.'
+
 export const NOT_FOUND = '페이지를 찾을 수 없습니다.'
