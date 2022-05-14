@@ -5,10 +5,15 @@ import cn from 'classnames/bind'
 
 const cx = cn.bind(styles)
 
-const Loading = () => {
+interface Props {
+  height?: string
+  width?: string
+}
+
+const Loading = ({ height, width }: Props) => {
   return (
     <div className={cx('loading')}>
-      <ReactLoading type='spinningBubbles' />
+      <ReactLoading type='spinningBubbles' height={height} width={width} />
     </div>
   )
 }

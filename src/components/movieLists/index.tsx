@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction, CSSProperties } from 'react'
 import { useSetRecoilState } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
-import ReactLoading from 'react-loading'
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
 import store from 'store'
 
+import { Loading } from 'components'
 import { IMovie } from 'types/movie'
 import { NO_RESULTS } from '../../assets/texts'
 
@@ -57,7 +57,7 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {!isNoResult ? (
+            {movieDatas?.length || !isNoResult ? (
               movieDatas?.map((movie, idx) => {
                 const { Title, Year, Type, Poster, fav } = movie
                 const keySetting = `${Title}-${idx}`
@@ -102,7 +102,7 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
             )}
             {!isNoResult && isLoading && (
               <div className={cx('loading')} ref={setTarget}>
-                <ReactLoading type='spinningBubbles' height='45px' width='45px' />
+                <Loading height='45px' width='45px' />
               </div>
             )}
             {provided.placeholder}
