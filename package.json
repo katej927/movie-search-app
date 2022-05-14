@@ -53,13 +53,18 @@
     "store": "^2.0.12",
     "web-vitals": "^2.1.0"
   },
+	"resolutions": {
+    "@types/react": "18.0.0",
+    "@types/react-dom": "18.0.0"
+  },
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "@types/lodash": "^4.14.182",
     "@types/node": "^16.7.13",
-    "@types/react": "^18.0.0",
+    "@types/react": "^18.0.9",
     "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-dom": "^18.0.0",
+    "@types/react-virtualized": "^9.21.21",
     "@types/store": "^2.0.2",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.14.0",

@@ -1,7 +1,8 @@
-import { Dispatch, SetStateAction, memo } from 'react'
+import { Dispatch, SetStateAction, memo, useCallback, CSSProperties } from 'react'
 import { useSetRecoilState } from 'hooks/state'
 import { modalState, IModalState } from 'states/modal'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
+import { List } from 'react-virtualized'
 import store from 'store'
 
 import { Loading, Movie } from 'components'
@@ -21,6 +22,13 @@ interface Props {
   setMovieLists?: Dispatch<SetStateAction<IMovie[]>>
   ActiveDnd: boolean
 }
+
+interface IRowRender {
+  key: string
+  index: number
+  style: CSSProperties
+}
+
 const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieLists, ActiveDnd }: Props) => {
   const setModalShow = useSetRecoilState<IModalState>(modalState)
 
@@ -40,6 +48,14 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
     setMovieLists && setMovieLists(getPrevFavs)
   }
 
+  const rowRenderer = useCallback(
+    ({ key, index }: IRowRender) => {
+      const movie = movieDatas[index]
+      return <Movie index={index} movie={movie} key={key} handleClick={handleClick} />
+    },
+    [movieDatas, handleClick]
+  )
+
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <Droppable droppableId='movieLists' isDropDisabled={!ActiveDnd}>
@@ -50,13 +66,15 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
             ref={provided.innerRef}
           >
             {movieDatas?.length || !isNoResult ? (
-              movieDatas?.map((movie, idx) => {
-                const { Title } = movie
-                const key = `${Title}-${idx}`
-                const dragKey = `drag-${Title}-${idx}`
-
-                return <Movie key={key} dragKey={dragKey} handleClick={handleClick} idx={idx} movie={movie} />
-              })
+              <List
+                className={styles.movieList}
+                width={320}
+                height={170 * movieDatas.length}
+                rowCount={movieDatas.length}
+                rowHeight={170}
+                rowRenderer={rowRenderer}
+                list={movieDatas}
+              />
             ) : (
               <span className={cx('noResults')}>{NO_RESULTS}</span>
             )}

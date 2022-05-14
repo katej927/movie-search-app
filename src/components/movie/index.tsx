@@ -10,9 +10,8 @@ import cn from 'classnames'
 const cx = cn.bind(styles)
 
 interface Props {
-  dragKey: string
   handleClick: (movie: IMovie) => void
-  idx: number
+  index: number
   movie: IMovie
 }
 
@@ -23,10 +22,12 @@ const iconStyles: CSSProperties = {
   color: '#ff3c79',
 }
 
-const Movie = ({ dragKey, handleClick, idx, movie }: Props) => {
+const Movie = ({ handleClick, index, movie }: Props) => {
   const { Poster, Title, fav, Year, Type } = movie
+  const dragKey = `${Title}-${index}`
+
   return (
-    <Draggable draggableId={dragKey} index={idx}>
+    <Draggable draggableId={dragKey} index={index}>
       {providedChild => (
         <summary
           className={cx(styles.movieWrap)}
@@ -34,6 +35,7 @@ const Movie = ({ dragKey, handleClick, idx, movie }: Props) => {
           ref={providedChild.innerRef}
           {...providedChild.dragHandleProps}
           {...providedChild.draggableProps}
+          // style={style}
         >
           {Poster === 'N/A' ? (
             <div className={cx(styles.imgNix)} />
@@ -55,4 +57,4 @@ const Movie = ({ dragKey, handleClick, idx, movie }: Props) => {
   )
 }
 
-export default memo(Movie)
+export default memo(Movie, (prevProps, nextProps) => prevProps.movie === nextProps.movie)
