@@ -1,13 +1,13 @@
-import { useRecoilValue } from 'hooks/state'
 import { useEffect, useState } from 'hooks'
-import { modalState } from 'states/modal'
+import { useRecoilValue } from 'hooks/state'
+import { modalState, IModalState } from 'states/modal'
 import { MovieLists } from 'components'
 import store from 'store'
 
 import { IMovie } from 'types/movie'
 
 const Favs = () => {
-  const modalStatus = useRecoilValue(modalState)
+  const modalStatus = useRecoilValue<IModalState>(modalState)
   const [movieLists, setMovieLists] = useState<IMovie[]>(store.get('favs'))
 
   useEffect(() => {

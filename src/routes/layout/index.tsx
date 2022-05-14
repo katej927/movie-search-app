@@ -1,11 +1,11 @@
+import { modalState, IModalState } from 'states/modal'
+import { useRecoilValue } from 'hooks/state'
 import { Outlet } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 
-import styles from './Layout.module.scss'
-
 import { Tab, Header, Modal } from 'components'
-import { modalState, IModalState } from 'states/modal'
-import { useRecoilValue } from 'hooks/state'
+
+import styles from './Layout.module.scss'
 
 const Layout = () => {
   const { isShow } = useRecoilValue<IModalState>(modalState)

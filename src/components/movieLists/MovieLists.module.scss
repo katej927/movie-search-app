@@ -28,7 +28,7 @@
     margin-bottom: 20px;
     overflow: hidden;
     background-color: rgba(white, 10%);
-    border-radius: sizes.$GLOBAL_BORDER-RADIUS;
+    border-radius: sizes.$BORDER_RADIUS_GENERAL;
 
     &:hover {
       background-color: rgba(white, 20%);
@@ -41,6 +41,7 @@
     }
 
     .movieImg {
+      width: 110px;
       height: inherit;
     }
 

@@ -1,6 +1,6 @@
 @use '/src/styles/mixins/flexbox';
 
-.Loading {
+.loading {
   @include flexbox.flexbox(center, center);
   height: inherit;
 }

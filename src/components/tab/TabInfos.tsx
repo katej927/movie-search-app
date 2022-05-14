@@ -1,4 +1,3 @@
-import { AiOutlineStar } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
 import { BsBookmarkStarFill } from 'react-icons/bs'
 

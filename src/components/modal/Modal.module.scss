@@ -18,7 +18,7 @@
     width: 250px;
     height: 150px;
     background-color: var(--primary-white1);
-    border-radius: sizes.$GLOBAL_BORDER-RADIUS;
+    border-radius: sizes.$BORDER_RADIUS_GENERAL;
 
     .btnWrap {
       @include flexbox.flexbox(between, center);

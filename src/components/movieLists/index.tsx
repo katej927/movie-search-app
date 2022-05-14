@@ -5,12 +5,12 @@ import ReactLoading from 'react-loading'
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
 import store from 'store'
 
+import { IMovie } from 'types/movie'
+import { NO_RESULTS } from '../../assets/texts'
+
 import { cn } from 'styles'
 import styles from './MovieLists.module.scss'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
-
-import { IMovie } from 'types/movie'
-import { NO_RESULTS } from '../../assets/texts'
 
 const cx = cn.bind(styles)
 
@@ -27,7 +27,7 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
 
   const handleClick = (movie: IMovie): void => setModalShow({ isShow: true, selectedMovie: movie })
 
-  const handleDragEnd = (result: DropResult) => {
+  const handleDragEnd = (result: DropResult): void => {
     if (!result.destination) return
     const {
       destination: { index: destIdx },
@@ -48,7 +48,6 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
     color: '#ff3c79',
   }
 
-  console.log('!movieDatas?.length', !movieDatas?.length)
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <Droppable droppableId='movieLists' isDropDisabled={!ActiveDnd}>

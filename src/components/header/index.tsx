@@ -1,24 +1,23 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
 import { useLocation } from 'react-router-dom'
-// import { useSetRecoilState } from 'hooks/state'
-import { useRecoilState } from 'hooks/state'
-import { paramsGetMoviesApiState } from 'states/movie'
+import { useSetRecoilState } from 'hooks/state'
+import { paramsGetMoviesApiState, IParamsGetMoviesApiState } from 'states/movie'
+
+import { BiSearch } from 'react-icons/bi'
 
 import styles from './Header.module.scss'
 import { cn } from 'styles'
-import { BiSearch } from 'react-icons/bi'
 
 const cx = cn.bind(styles)
 
 const Header = () => {
-  const [paramsGetMoviesApi, setParamsGetMoviesApi] = useRecoilState(paramsGetMoviesApiState)
+  const setParamsGetMoviesApi = useSetRecoilState<IParamsGetMoviesApiState>(paramsGetMoviesApiState)
 
-  // const setParamsGetMoviesApi = useSetRecoilState(paramsGetMoviesApiState)
   const [text, setText] = useState<string>('')
 
   const location = useLocation()
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
     setParamsGetMoviesApi({ searchWord: text, pageNum: 1 })
     setText('')
@@ -27,7 +26,6 @@ const Header = () => {
     setText(value)
   }
 
-  console.log('location', location)
   return (
     <header className={cx('header')}>
       {location.pathname === '/' ? (

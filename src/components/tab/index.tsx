@@ -1,7 +1,9 @@
+import { NavLink } from 'react-router-dom'
+
+import { TABS } from './TabInfos'
+
 import cn from 'classnames'
 import styles from './Tab.module.scss'
-import { NavLink } from 'react-router-dom'
-import { TABS } from './TabInfos'
 
 const cx = cn.bind(styles)
 

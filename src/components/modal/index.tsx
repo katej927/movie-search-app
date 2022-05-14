@@ -4,12 +4,12 @@ import { modalState, IModalState } from 'states/modal'
 import { moviesInSearchState } from 'states/movie'
 import store from 'store'
 
-import styles from './Modal.module.scss'
-import { cn } from 'styles'
-
 import { IMovie } from 'types/movie'
 
 import { addOrRemoveBtnText } from 'assets/texts'
+
+import styles from './Modal.module.scss'
+import { cn } from 'styles'
 
 const cx = cn.bind(styles)
 
@@ -29,7 +29,7 @@ const Modal = () => {
     setModalShow(prev => ({ ...prev, isShow: false }))
   })
 
-  const updateFavInMovie = (movies: IMovie[]) => {
+  const updateFavInMovie = (movies: IMovie[]): IMovie[] => {
     return movies.map(({ fav: favState, imdbID: id, ...movie }) => ({
       ...movie,
       imdbID: id,
@@ -56,7 +56,7 @@ const Modal = () => {
 
   return (
     <div className={cx('overlay', { hide: !isShow })}>
-      <section className={styles.content} ref={ref}>
+      <section className={cx('content')} ref={ref}>
         <span>{btnText[0]}</span>
         <div className={cx('btnWrap')}>
           <button type='button' onClick={() => handleClick(false)}>
