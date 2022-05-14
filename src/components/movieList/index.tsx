@@ -32,7 +32,10 @@ interface IRowRender {
 const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieLists, ActiveDnd }: Props) => {
   const setModalShow = useSetRecoilState<IModalState>(modalState)
 
-  const handleClick = (movie: IMovie): void => setModalShow({ isShow: true, selectedMovie: movie })
+  const handleClick = useCallback(
+    (movie: IMovie) => setModalShow({ isShow: true, selectedMovie: movie }),
+    [setModalShow]
+  )
 
   const handleDragEnd = (result: DropResult): void => {
     if (!result.destination) return
