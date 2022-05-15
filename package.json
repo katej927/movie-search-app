@@ -37,7 +37,9 @@
     "camelcase-keys": "^7.0.2",
     "classnames": "^2.3.1",
     "dayjs": "^1.11.2",
+    "global": "^4.4.0",
     "lodash": "^4.17.21",
+    "netlify-cli": "^10.3.1",
     "react": "^18.1.0",
     "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^18.1.0",
@@ -53,7 +55,7 @@
     "store": "^2.0.12",
     "web-vitals": "^2.1.0"
   },
-	"resolutions": {
+  "resolutions": {
     "@types/react": "18.0.0",
     "@types/react-dom": "18.0.0"
   },

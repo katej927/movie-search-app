@@ -34,7 +34,6 @@ const Search = () => {
       const resResultWithFav = _.uniqBy(handleCheckMoviesInFavs(search), 'imdbID')
 
       const resStatus = JSON.parse(response.toLowerCase())
-      console.log('resStatus', resStatus)
 
       setIsNoResult(!resStatus)
       if (!resStatus) setShownMovies([])
