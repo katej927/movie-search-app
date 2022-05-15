@@ -56,7 +56,7 @@ const MovieLists = ({ movieDatas, setTarget, isNoResult, isLoading, setMovieList
   const rowRenderer = useCallback(
     ({ key, index }: IRowRender) => {
       const movie = movieDatas[index]
-      return <Movie index={index} movie={movie} key={key} handleClick={handleClick} />
+      return <Movie index={index} movie={movie} key={key} handleClick={handleClick} ActiveDnd={ActiveDnd} />
     },
     [movieDatas, handleClick]
   )

@@ -13,6 +13,7 @@ interface Props {
   handleClick: (movie: IMovie) => void
   index: number
   movie: IMovie
+  ActiveDnd: boolean
 }
 
 const iconStyles: CSSProperties = {
@@ -22,12 +23,12 @@ const iconStyles: CSSProperties = {
   color: '#ff3c79',
 }
 
-const Movie = ({ handleClick, index, movie }: Props) => {
+const Movie = ({ handleClick, index, movie, ActiveDnd }: Props) => {
   const { Poster, Title, fav, Year, Type } = movie
   const dragKey = `${Title}-${index}`
 
   return (
-    <Draggable draggableId={dragKey} index={index}>
+    <Draggable draggableId={dragKey} index={index} isDragDisabled={!ActiveDnd}>
       {providedChild => (
         <summary
           className={cx(styles.movieWrap)}
