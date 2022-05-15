@@ -96,4 +96,6 @@ layout에서는 header, main, footer은 고정되어 있고 `uselocation`, 데�
 
 ## 🔸 전역적인 color 관리 (by CSS variables)<a name="sub5-3"></a>
 
-문서 전반적으로 재사용할 임의의 css(color) 값을 담아 효율적인 css 관리 도모
+
+- `CSS custom properties (variables)` 활용
+- 문서 전반적으로 재사용할 임의의 css(color) 값을 담아 효율적인 css 관리 도모
