@@ -59,7 +59,9 @@
     - 즐겨찾기 탭에서 조회 가능
 
         "즐겨찾기"된 데이터는 로컬 저장하여, 다음에 접속 했을 때, 즐겨찾기 조회 가능 (by `store.js`)
-        
+4. React.memo
+    
+    props가 바뀌지 않았다면 리렌더링 하지 않도록 설정  
 ## 🔸 Favorites Tab (즐겨찾기 탭)<a name="sub4-2"></a>
 > 현재까지 즐겨찾기한 영화들의 목록을 보여주는 탭
 > 
@@ -82,6 +84,10 @@
 3. Intersection Observer (for Infinite scroll)
     
     이 기능은 비동기적으로 실행되기 때문에, **`scroll`** 같은 이벤트 기반의 요소 관찰에서 발생하는 [렌더링 성능](https://developers.google.com/web/fundamentals/performance/rendering/?hl=ko)이나 이벤트 연속 호출 같은 문제 없이 사용 가능
+    
+4. React.memo
+    
+    props가 바뀌지 않았다면 리렌더링 하지 않도록 설정
     
 ## 🔸 컴포넌트 재활용<a name="sub5-2"></a>
 두 탭 (검색, 즐겨찾기)은 정해진 layout 안에서 데이터만 변경
