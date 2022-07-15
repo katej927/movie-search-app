@@ -22,7 +22,7 @@
 
 - 개발자: 정선미
 
-- 기간: ‘22.5.9 ~ 5.15 (Design + Development)
+- 기간: ‘22.5.10 ~ 5.15 (Design + Development)
 
 # 📌 Techs<a name="main3"></a>
 - React + Recoil + Typescript
