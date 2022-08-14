@@ -38,6 +38,7 @@
 - scss + classnames
 - camelcase-keys
 - lodash
+- netlify
 
 # 📌 Detail<a name="main4"></a>
 
