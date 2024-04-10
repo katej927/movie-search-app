@@ -1,3 +1,6 @@
+![Movie Search App1](https://github.com/katej927/Algorithm/assets/69146527/9468b1f7-1942-49bf-9572-8caa6e37a7d0)
+
+
 # Table of Contents
 1. [Link](#main1)
 2. [About](#main2)
@@ -45,7 +48,7 @@
 ## 🔸 Search Tab (검색 탭)<a name="sub4-1"></a>
 > 영화를 검색하는 탭
 > 
-
+![movie-search-app2](https://github.com/katej927/Algorithm/assets/69146527/2e38226c-4e10-45ee-bb9b-be32e004ad63)
 1. 앱 첫 진입 시, 첫 화면
     
     처음 검색 결과 영역: "검색 결과가 없습니다."로 노출
@@ -64,7 +67,7 @@
 ## 🔸 Favorites Tab (즐겨찾기 탭)<a name="sub4-2"></a>
 > 현재까지 즐겨찾기한 영화들의 목록을 보여주는 탭
 > 
-
+![movie-search-app3](https://github.com/katej927/Algorithm/assets/69146527/fcc7d151-10bb-46ed-b5a0-5f3576b37e82)
 - 즐겨찾기 목록 순서를 드래그&드롭으로 조절 가능 (by `react-beautiful-dnd`)
 
 - 한 번에 모든 데이터를 로딩 ( 별도의 페이징 없이 )
